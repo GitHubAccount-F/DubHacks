@@ -1,1 +1,1 @@
-# Sick Sense
+# Sick-Sense
