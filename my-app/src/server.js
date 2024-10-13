@@ -1,13 +1,32 @@
-import express from "express";
+//import express from "express";
 import cors from "cors";
 import { MongoClient } from "mongodb";
 import { config } from "dotenv";
 
 
+/*
+const { auth } = require('express-openid-connect');
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: 'a long, randomly-generated string stored in env', //A long, random string
+  baseURL: 'http://localhost:3000', // The URL where the application is served
+  clientID: 'oVmDhzDw3rQwuURL85u7YXm42eQLFuwu',//The Client ID found in your Application settings
+  issuerBaseURL: 'https://dev-rgyrohrkp1xr7ptn.us.auth0.com' //The Domain as a secure URL found in your Application settings
+};
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+app.use(auth(config));
+
+// req.isAuthenticated is provided from the auth router
+app.get('/', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
+});
+
+*/
 
 config(); // Load environment variables from .env file
-
-
 
 const app = express();
 const port = 5000;
@@ -47,8 +66,8 @@ connectToDatabase();
 // analog page
 app.get("/analog", async (req, res) => {
     try {
-        const database = client.db("horror");
-        const collect = database.collection("Analog");
+        const database = client.db("Collection");
+        const collect = database.collection("Users");
         const analog = await collect.find({}).toArray();
         //console.log(analog);
         res.json(analog);
@@ -60,8 +79,8 @@ app.get("/analog", async (req, res) => {
 
   app.get("/creepypasta", async (req, res) => {
     try {
-        const database = client.db("horror");
-        const collect = database.collection("Creepypasta");
+        const database = client.db("Collection");
+        const collect = database.collection("Users");
         const analog = await collect.find({}).toArray();
         res.json(analog);
     } catch (error) {
