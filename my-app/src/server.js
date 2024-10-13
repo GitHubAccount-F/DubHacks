@@ -1,4 +1,4 @@
-//import express from "express";
+import express from "express";
 import cors from "cors";
 import { MongoClient } from "mongodb";
 import { config } from "dotenv";
@@ -34,7 +34,7 @@ const uri = process.env.MONGODB_URI;
 console.log(uri);
 
 app.use(cors());
-app.use(express.json());
+console.log(process.env.MONGODB_URI);
 
 
 app.listen(port, () => {
